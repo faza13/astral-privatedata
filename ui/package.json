@@ -8,16 +8,16 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "bootstrap": "^4.4.1",
-    "bootstrap-vue": "^2.3.0",
-    "core-js": "^3.4.4",
+    "bootstrap": "^4.5.0",
+    "bootstrap-vue": "^2.15.0",
+    "core-js": "^3.6.5",
     "momentjs": "^2.0.0",
     "vue": "^2.6.10",
-    "web3": "^1.2.5"
+    "web3": "^1.2.9"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.1.0",
-    "@vue/cli-service": "^4.1.0",
+    "@vue/cli-plugin-babel": "^4.4.4",
+    "@vue/cli-service": "^4.4.4",
     "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [

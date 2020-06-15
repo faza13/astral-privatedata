@@ -129,15 +129,15 @@
 
 <script>
 // import Content from './components/Content';
-import getWeb3 from "./utils/getWeb3";
+// import getWeb3 from "./utils/getWeb3";
 import Biodata from "./utils/contracts/Biodata";
-import web3 from 'web3'
+import Web3 from 'web3'
 
 export default {
   name: 'app',
   data() {
     return {
-      web3: null,
+      web: null,
       contractAddress: '0x9775E93bB2D4776696A13426289894c9f42EF7D6', // 0.00687926 ETH
       contract: null,
       address: '',
@@ -158,10 +158,16 @@ export default {
     }
   },
   async mounted() {
-    this.web3 = await getWeb3();
-    const networkId = await this.web3.eth.net.getId();
-    const deployedNetwork = await Biodata.networks[networkId];
-    let contract = await new this.web3.eth.Contract(
+
+    const provider = await new Web3.providers.HttpProvider(
+        // "http://127.0.0.1:9545"
+        "http://127.0.0.1:7545"
+      );
+    this.web = await new Web3(provider);
+    // const networkId = await this.web.eth.net.getId();
+    const deployedNetwork = await Biodata.networks[5777];
+
+    let contract = await new this.web.eth.Contract(
             Biodata.abi,
             deployedNetwork && deployedNetwork.address,
         );
@@ -169,11 +175,11 @@ export default {
   },
   methods: {
     saveData: function(){
-      const birthdate = this.web3.utils.toHex(this.birthdate)
-      const nationality = this.web3.utils.toHex(this.nationality)
-      const imei = this.web3.utils.toHex(this.imei)
-      const gender = this.web3.utils.toHex(this.gender)
-      const city = this.web3.utils.toHex(this.city)
+      const birthdate = this.web.utils.toHex(this.birthdate)
+      const nationality = this.web.utils.toHex(this.nationality)
+      const imei = this.web.utils.toHex(this.imei)
+      const gender = this.web.utils.toHex(this.gender)
+      const city = this.web.utils.toHex(this.city)
 
       const birthdate_perm = this.birthdate_perm
       const nationality_perm = this.nationality_perm
@@ -202,12 +208,13 @@ export default {
           let data = [];
           let permission = [];
           let encrypt = [];
-
+          // console.log(ress)
+          // console.log(err)
           for(let i=0; i < ress[0].length; i++)
           {
             encrypt.push(ress[0][i])
-            console.log(that.web3.utils.hexToString(ress[0][i]))
-            data.push((that.web3.utils.hexToString(ress[0][i])))
+            console.log(that.web.utils.hexToString(ress[0][i]))
+            data.push((that.web.utils.hexToString(ress[0][i])))
 
             permission.push(ress[1][i])
           }
